@@ -20,6 +20,21 @@ body {
     border:1px solid gray;
 }
 
+.wls-copy {
+    margin-left:5%;
+    margin-bottom:5%;
+    text-align: left;
+    border:1px solid gray;
+    padding:1em;
+}
+
+.wls-home {
+    margin-left:5%;
+    margin-bottom:1%;
+    text-align: left;
+    padding:1em;
+}
+
 .wls-main {
     -webkit-background-size: cover;
     -moz-background-size: cover;
