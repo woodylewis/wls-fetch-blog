@@ -17,11 +17,48 @@
   <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Home</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="http://wlsllc.com" target="_blank">WLS</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h3>AngularJS - Web Service</h3>
+                    <p>
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
   <!-- SERVICE CONTROLLER -->
   <div ng-cloak ng-controller="ServiceCtrl">
-    <div class="wls-home"><a href='/'>Back</a></div>
     <div class="wls-copy">
-      Creating a Service Controller that makes a Web Services call to
+      This app creates a Service Controller that makes a RESTful call to
       <a href="http://woodylewis.com" target="_blank">my blog</a> and retrieves
       a JSON payload of all published posts. 
       <p>The controller stores the payload, making it available whenever the show/hide state is toggled. Clicking a link opens a separate page. 
