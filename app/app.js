@@ -16,7 +16,7 @@ angular.module('myApp', [
 
   var handlePostSuccess = function(data, status) {
     $scope.currentPost = data;
-    var w = open("","Fetched from woodylewis.com","", "");
+    var w = open("","_blank","", "");
     var str1 = $scope.currentPost;
     var str2 = str1.replace('img src="/', 'img src="http://woodylewis.com/');
     w.document.write(str2);
@@ -27,6 +27,7 @@ angular.module('myApp', [
           .success(handleSuccess);  
 
   $scope.showPosts = false;
+
   $scope.toggle= function() {
     $scope.showPosts = !$scope.showPosts;
   };
