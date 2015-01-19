@@ -17,7 +17,7 @@ try
 	foreach($dbh->query($sql) as $row)
 	{
 		$node = array("nid" => $row['nid'], "title" => $row['title']);
-    $json[] = $node;
+    	$json[] = $node;
 	}
 	echo json_encode($json);
 	$dbh = null;

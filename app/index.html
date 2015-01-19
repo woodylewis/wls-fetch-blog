@@ -62,11 +62,10 @@
       <a href="http://woodylewis.com" target="_blank">my blog</a> and retrieves
       a JSON payload of all published posts. 
       <p>The controller stores the payload, making it available whenever the show/hide state is toggled. Clicking a link opens a separate page. 
-      <p>(To do: open an overlay instead.)
       <p><a href="https://github.com/woodylewis/wls-fetch-blog" target="_blank">GitHub Repo</a>
     </div>
     <button type="button" class="btn btn-primary" ng-click="toggle()">Show/Hide Blog Posts</button>
-    <div class="wls-blog-list" ng-show="showPosts">
+    <div ng-cloak class="wls-blog-list" ng-show="showPosts">
       <div ng-repeat="post in posts">
         <div class='wls-blog-container'>
           <div class='wls-click' ng-click="showCurrentPost(post.nid)">{{post.title}}</div>
