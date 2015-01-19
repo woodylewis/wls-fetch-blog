@@ -4,6 +4,7 @@ angular.module('myApp.services', [])
 
 .factory('fetchBlogService' , function($http) {
 	var blogUrl = 'http://woodylewis.com/wls_send.php';
+	var blogPostUrl = 'http://woodylewis.com/wls_send_post.php?';
 
 	var fetchBlog = function() {
 		return $http ({
@@ -12,9 +13,20 @@ angular.module('myApp.services', [])
 		});
 	}
 
+	var fetchBlogPost = function(nid) {
+		return $http ({
+			method: 'GET',
+			url: blogPostUrl + nid
+		});
+	}
+
+	//--- RETURN THE SERVICE OBJECT WITH METHODS -----
 	return {
-		getPosts: function() {
+		fetchBlog: function() {
 			return fetchBlog();
+		},
+		fetchBlogPost: function(nid) {
+			return fetchBlogPost(nid);
 		}
 	};
 });

@@ -1,6 +1,6 @@
 /* app css stylesheet */
 
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+.wls-click, .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 body {
     text-align: center;

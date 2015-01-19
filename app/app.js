@@ -14,11 +14,21 @@ angular.module('myApp', [
     console.log('POSTS', $scope.posts);
   };
 
-  $scope.posts = fetchBlogService.getPosts()
+  var handlePostSuccess = function(data, status) {
+    $scope.currentPost = data;
+    console.log('CURRENT POST', $scope.currentPost);
+  };
+
+  $scope.posts = fetchBlogService.fetchBlog()
           .success(handleSuccess);  
 
   $scope.showPosts = false;
   $scope.toggle= function() {
     $scope.showPosts = !$scope.showPosts;
+  };
+
+  $scope.showCurrentPost= function(nid) {
+    $scope.currentPost = fetchBlogService.fetchBlogPost(nid)
+    .success(handlePostSuccess);
   };
 });
