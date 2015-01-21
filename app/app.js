@@ -9,6 +9,7 @@ angular.module('myApp', [
 ])
 
 .controller('ServiceCtrl', function($scope, $window, fetchBlogService) {
+  $scope.showPosts = false;
   var handleSuccess = function(data, status) {
     $scope.posts = data;
     console.log('POSTS', $scope.posts);
@@ -26,7 +27,6 @@ angular.module('myApp', [
   $scope.posts = fetchBlogService.fetchBlog()
           .success(handleSuccess);  
 
-  $scope.showPosts = false;
 
   $scope.toggle= function() {
     $scope.showPosts = !$scope.showPosts;
