@@ -12,9 +12,6 @@ To do: modify use of ngCloak and ngHide to eliminate occasional flicker.
 bower install angular-bootstrap
 ```
 ```
-bower install angular-ui-router
-```
-```
 npm install
 ```
 ```
