@@ -59,13 +59,12 @@
   <div ng-cloak ng-controller="ServiceCtrl">
     <div class="wls-copy">
       This app creates a Service Controller that makes a RESTful call to
-      <a href="http://woodylewis.com" target="_blank">my blog</a> and retrieves
-      a JSON payload of all published posts. 
-      <p>The controller stores the payload, making it available whenever the show/hide state is toggled. Clicking a link opens a separate page. 
+      <a href="http://woodylewis.com" target="_blank">my blog</a>, running on a Drupal CMS, and retrieves a JSON payload of all published posts. 
+      <p><br>The controller stores the payload, making it available whenever the show/hide state is toggled. Clicking a link opens a separate page. The base CMS URL is prepended to the first image in each post. Some images have a different format, and won't be pulled in. Some special characters have not been decoded.    
       <p><a href="https://github.com/woodylewis/wls-fetch-blog" target="_blank">GitHub Repo</a>
     </div>
     <button type="button" class="btn btn-primary" ng-click="toggle()">Show/Hide Blog Posts</button>
-    <div ng-cloak class="wls-blog-list" ng-show="showPosts">
+    <div ng-cloak class="wls-blog-list" ng-hide="showPosts">
       <div ng-repeat="post in posts">
         <div ng-cloak class="wls-blog-container">
           <div class="wls-click" ng-click="showCurrentPost(post.nid)" ng-cloak>{{post.title}}</div>
