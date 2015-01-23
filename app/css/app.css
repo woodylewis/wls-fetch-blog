@@ -1,5 +1,9 @@
 /* app css stylesheet */
 
+.ng-hide {
+    display: :none!important;
+}
+
 .wls-click, .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 body {
