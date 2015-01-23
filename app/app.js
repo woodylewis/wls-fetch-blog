@@ -9,7 +9,7 @@ angular.module('myApp', [
 ])
 
 .controller('ServiceCtrl', function($scope, $window, fetchBlogService) {
-  $scope.showPosts = true;
+  $scope.showPosts = false;
   var handleSuccess = function(data, status) {
     $scope.posts = data;
     console.log('POSTS', $scope.posts);

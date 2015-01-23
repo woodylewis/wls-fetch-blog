@@ -64,8 +64,8 @@
       <p><a href="https://github.com/woodylewis/wls-fetch-blog" target="_blank">GitHub Repo</a>
     </div>
     <button type="button" class="btn btn-primary" ng-click="toggle()">Show/Hide Blog Posts</button>
-    <div ng-cloak class="wls-blog-list" ng-hide="showPosts">
-      <div ng-repeat="post in posts">
+    <div ng-cloak id="wls-blog-list" ng-show="showPosts" class="ng-hide">
+      <div ng-cloak ng-repeat="post in posts">
         <div ng-cloak class="wls-blog-container">
           <div class="wls-click" ng-click="showCurrentPost(post.nid)" ng-cloak>{{post.title}}</div>
         </div>
