@@ -34,6 +34,16 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
+                      <a ui-sref="index">Page Home</a>  
+                    </li>
+                    <li>
+                    <li>
+                      <a ui-sref="route1">Blog List</a>  
+                    </li>
+                    <li>
+                      <a ui-sref="route2">State 2</a>  
+                    </li>
+                    <li>
                         <a href="http://wlsllc.com" target="_blank">WLS</a>
                     </li>
                 </ul>
@@ -54,15 +64,15 @@
 
     </div>
     <!-- /.container -->
-
-  <!-- SERVICE CONTROLLER -->
-  <div ng-cloak ng-controller="ServiceCtrl">
     <div class="wls-copy">
       This app creates a Service Controller that makes a RESTful call to
       <a href="http://woodylewis.com" target="_blank">my blog</a>, running on a Drupal CMS, and retrieves a JSON payload of all published posts. 
       <p><br>The controller stores the payload, making it available whenever the show/hide state is toggled. Clicking a link opens a separate page. The base CMS URL is prepended to the first image in each post. Some images have a different format, and won't be pulled in. Some special characters have not been decoded.    
       <p><a href="https://github.com/woodylewis/wls-fetch-blog" target="_blank">GitHub Repo</a>
     </div>
+
+  <!-- SERVICE CONTROLLER 
+  <div ng-cloak ng-controller="ServiceCtrl">
     <button type="button" class="btn btn-primary" ng-click="toggle()">Show/Hide Blog Posts</button>
     <div ng-cloak id="wls-blog-list" ng-show="showPosts" class="ng-hide">
       <div ng-cloak ng-repeat="post in posts">
@@ -72,13 +82,15 @@
     </div>
     </div>
   </div>
+-->
+  <div ui-view="viewA"></div>    
 
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
   <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   <script src="app.js"></script>

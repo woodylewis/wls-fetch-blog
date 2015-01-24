@@ -5,7 +5,8 @@
 angular.module('myApp', [
   'myApp.services',
 	'ui.bootstrap',
-	'ui.bootstrap.tpls'
+	'ui.bootstrap.tpls',
+  'ui.router'
 ])
 
 .controller('ServiceCtrl', function($scope, $window, fetchBlogService) {
@@ -27,13 +28,42 @@ angular.module('myApp', [
   $scope.posts = fetchBlogService.fetchBlog()
           .success(handleSuccess);  
 
-
+<!--
   $scope.toggle= function() {
     $scope.showPosts = !$scope.showPosts;
   };
+-->
 
   $scope.showCurrentPost= function(nid) {
     $scope.currentPost = fetchBlogService.fetchBlogPost(nid)
     .success(handlePostSuccess);
   };
-});
+})
+.config(['$stateProvider', '$urlRouterProvider', 
+        function($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider
+  .otherwise('/');
+
+  $stateProvider
+    .state('index', {
+      url: "/",
+      views: {
+        "viewA" : { template: ""}
+      }
+    })
+    .state('route1', {
+      url: "/route1",
+      views: {
+        "viewA" : { 
+          templateUrl: "partials/blog.list.html",   
+          controller: 'ServiceCtrl'
+          }
+        }
+    })
+    .state('route2', {
+      url: "/route2",
+      views: {
+        "viewA" : { template: "<h3>State 2 - View B</h3>"}
+      }
+    })
+}]);
