@@ -12,17 +12,21 @@ body {
     margin-left: 10%;
 }
 
-.wls-blog-container {
-	width:50%;
-	margin:1em;
+.wls-blog-post-container {
+	width:70%;
+	margin: 0 auto;
 	text-align: left;
 }
 
 #wls-blog-list {
-	margin-top:5%;
-	margin-left:5%;
+    width:70%;
+    margin: 0 auto;
     border:1px solid gray;
     padding:1em;
+}
+
+.wls-blog-list-container {
+    text-align: left;
 }
 
 .wls-copy {
