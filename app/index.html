@@ -59,7 +59,7 @@
       <div class="wls-copy">
         This app creates a Service Controller that makes a RESTful call to
         <a href="http://woodylewis.com" target="_blank">my blog</a>, running on a Drupal CMS, and retrieves a JSON payload of all published posts. 
-        <p><br>The controller stores the payload, making it available whenever the show/hide state is toggled. Clicking a link opens a separate page. The base CMS URL is prepended to the first image in each post. Some images have a different format, and won't be pulled in. Some special characters have not been decoded.    
+        <p><br>The controller stores the payload in its scope, making it available to a child controller attached to the view for specific post. The blog domain is prepended to URLs for all images hosted on that domain. Some special characters have not been decoded.    
         <p><a href="https://github.com/woodylewis/wls-fetch-blog" target="_blank">GitHub Repo</a>
       </div>
     </div><!-- /.container -->

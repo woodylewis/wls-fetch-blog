@@ -13,10 +13,13 @@ try
 	$json = array();
     $dbh = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
     //----- RETRIEVE PUBLISHED CONTENT OF TYPE "NARRATION" ---------------------
-	$sql = "SELECT nid, title FROM node WHERE type='narration' AND status='1' ORDER BY created DESC";
+	$sql = "SELECT nid, title, created FROM node WHERE type='narration' AND status='1' ORDER BY created DESC";
 	foreach($dbh->query($sql) as $row)
 	{
-		$node = array("nid" => $row['nid'], "title" => $row['title']);
+		$node = array("nid" => $row['nid'], 
+					  "title" => $row['title']),
+					  "date" => date("m-d-Y", $row['created']
+					 );
     	$json[] = $node;
 	}
 	echo json_encode($json);

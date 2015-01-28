@@ -45,9 +45,24 @@ angular.module('myApp', [
     console.log('POSTS', $scope.posts);
   };
 
+  function addRemoteDomain(payload) {
+    //--- PREPEND DOMAIN TO IMAGE URLs --------
+    console.log('start', payload);
+    var before1 = 'src="/';
+    var before2 = 'src="/sites/default/files/';
+    var after1 = 'src="http://woodylewis.com/';
+    var after2 = 'src="http://woodylewis.com/sites/default/files/';
+    var result1 = payload.split(before1).join(after1);
+    console.log('resul1', result1);
+    var result2 = result1.split(before2).join(after2);
+    console.log('resul2', result2);
+
+    return result2;
+  }
+
   var handlePostSuccess = function(data, status) {
-    $scope.currentPost = data;
-    //console.log('CURRENT POST', $scope.currentPost);
+    // PREPEND REMOTE DOMAIN TO IMAGE LINKS
+    $scope.currentPost = addRemoteDomain(data); 
     var postState = 'post';
     $state.go(postState);
   };
