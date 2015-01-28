@@ -8,9 +8,38 @@ angular.module('myApp', [
 	'ui.bootstrap.tpls',
   'ui.router'
 ])
+.config(['$stateProvider', '$urlRouterProvider', 
+        function($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider
+  .otherwise('/index');
 
-.controller('ServiceCtrl', function($scope, $window, fetchBlogService) {
-  $scope.showPosts = false;
+  $stateProvider
+    .state('index', {
+      url: "/index",
+      views: {
+        "state" : { templateUrl: "partials/main_state.html" },
+      }
+    })
+    .state('list', {
+      url: "/list",
+      views: {
+        "state" : { templateUrl: "partials/blog_list.html" },
+        }
+    })
+    .state('post', {
+      url: "/post",
+      views: {
+        "state" : { 
+                    templateUrl: "partials/blog_post.html" },
+                    controller: 'PostCtrl',
+      }
+    })
+}])
+//------  INJECT STRICT CONTEXTUAL ESCAPING INTO VIEW CONTROLLER -----
+.controller('PostCtrl', function($scope, $sce) {
+  $scope.markup = $sce.trustAsHtml($scope.$parent.currentPost);
+})
+.controller('ServiceCtrl', function($scope, $state, fetchBlogService) {
   var handleSuccess = function(data, status) {
     $scope.posts = data;
     console.log('POSTS', $scope.posts);
@@ -18,52 +47,16 @@ angular.module('myApp', [
 
   var handlePostSuccess = function(data, status) {
     $scope.currentPost = data;
-    var w = open("","_blank","", "");
-    var str1 = $scope.currentPost;
-    var str2 = str1.replace('img src="/', 'img src="http://woodylewis.com/');
-    w.document.write(str2);
-    console.log('CURRENT POST', str2);
+    //console.log('CURRENT POST', $scope.currentPost);
+    var postState = 'post';
+    $state.go(postState);
   };
 
-  $scope.posts = fetchBlogService.fetchBlog()
+  fetchBlogService.fetchBlog()
           .success(handleSuccess);  
-
-<!--
-  $scope.toggle= function() {
-    $scope.showPosts = !$scope.showPosts;
-  };
--->
 
   $scope.showCurrentPost= function(nid) {
     $scope.currentPost = fetchBlogService.fetchBlogPost(nid)
     .success(handlePostSuccess);
   };
-})
-.config(['$stateProvider', '$urlRouterProvider', 
-        function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider
-  .otherwise('/');
-
-  $stateProvider
-    .state('index', {
-      url: "/",
-      views: {
-        "viewA" : { template: ""}
-      }
-    })
-    .state('route1', {
-      url: "/route1",
-      views: {
-        "viewA" : { 
-          templateUrl: "partials/blog.list.html",   
-          controller: 'ServiceCtrl'
-          }
-        }
-    })
-    .state('route2', {
-      url: "/route2",
-      views: {
-        "viewA" : { template: "<h3>State 2 - View B</h3>"}
-      }
-    })
-}]);
+});
