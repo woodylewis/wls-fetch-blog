@@ -36,9 +36,11 @@ angular.module('myApp', [
     })
 }])
 //------  INJECT STRICT CONTEXTUAL ESCAPING INTO VIEW CONTROLLER -----
-.controller('PostCtrl', function($scope, $sce) {
+.controller('PostCtrl', ['$scope', '$sce', '$anchorScroll', '$location', function($scope, $sce, $anchorScroll, $location) {
   $scope.markup = $sce.trustAsHtml($scope.$parent.currentPost);
-})
+  $location.hash('top');
+  $anchorScroll();
+}])
 .controller('ServiceCtrl', function($scope, $state, fetchBlogService) {
   var handleSuccess = function(data, status) {
     $scope.posts = data;
