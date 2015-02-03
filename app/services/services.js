@@ -1,26 +1,38 @@
+'use strict';
+
 angular.module('myApp.services', [])
+/* SERVICE TO WRAP HTTP REQUESTS */
+.factory('fetchBlogService' , ['$q', '$http', 
+	function($q, $http) {
+		var blogUrl = 'http://woodylewis.com/wls_send.php';
+		var blogPostUrl = 'http://woodylewis.com/wls_send_post.php?';
 
-/* SERVICE TO WRAP HTTP REQUEST */
+		var fetchBlog = function() {
+			var deferred = $q.defer();
 
-.factory('fetchBlogService' , function($http) {
-	var blogUrl = 'http://woodylewis.com/wls_send.php';
-	var blogPostUrl = 'http://woodylewis.com/wls_send_post.php?';
+			$http.get(blogUrl)
+			.success( function(data) {
+				deferred.resolve(data);
+			})
+			.error(function(reason) {
+				deferred.reject(reason);
+			})
+			return deferred.promise;
+		}
 
-	var fetchBlog = function() {
-		return $http ({
-			method: 'GET',
-			url: blogUrl
-		});
-	}
+		var fetchBlogPost = function(nid) {
+			var deferred = $q.defer();
 
-	var fetchBlogPost = function(nid) {
-		return $http ({
-			method: 'GET',
-			url: blogPostUrl + nid
-		});
-	}
+			$http.get(blogPostUrl + nid)
+			.success( function(data) {
+				deferred.resolve(data);
+			})
+			.error(function(reason) {
+				deferred.reject(reason);
+			})
+			return deferred.promise;
+		}
 
-	//--- RETURN THE SERVICE OBJECT WITH METHODS -----
 	return {
 		fetchBlog: function() {
 			return fetchBlog();
@@ -29,4 +41,4 @@ angular.module('myApp.services', [])
 			return fetchBlogPost(nid);
 		}
 	};
-});
+}]);

@@ -1,7 +1,5 @@
 'use strict';
 
-/* INJECT DEPENDENCIES */
-
 angular.module('myApp', [
   'myApp.services',
 	'ui.bootstrap',
@@ -31,47 +29,45 @@ angular.module('myApp', [
       views: {
         "state" : { 
                     templateUrl: "partials/blog_post.html" },
-                    controller: 'PostCtrl',
+                    controller: 'PostCtrl'
       }
     })
 }])
-//------  INJECT STRICT CONTEXTUAL ESCAPING INTO VIEW CONTROLLER -----
 .controller('PostCtrl', ['$scope', '$sce', '$anchorScroll', '$location', function($scope, $sce, $anchorScroll, $location) {
+  //------  STRICT CONTEXTUAL ESCAPING OF CONTENT FROM REMOTE DOMAIN -----
   $scope.markup = $sce.trustAsHtml($scope.$parent.currentPost);
   //----- OLDER POSTS FURTHER DOWN THE LIST NEED TO BE SCROLLED TO THEIR TOP LINE
   $location.hash('top');
   $anchorScroll();
 }])
-.controller('ServiceCtrl', function($scope, $state, fetchBlogService) {
-  var handleSuccess = function(data, status) {
+.controller('ServiceCtrl', ['$scope', '$state', 'fetchBlogService', function($scope, $state, fetchBlogService) {
+  fetchBlogService.fetchBlog()
+  .then(function(data) {
     $scope.posts = data;
-    console.log('POSTS', $scope.posts);
+    console.log('posts', $scope.posts);
+  }), function (error) {
+      console.log('get posts error', error);
   };
 
   function addRemoteDomain(payload) {
-    //--- PREPEND DOMAIN TO IMAGE URLs --------
+    //--- PREPEND DOMAIN TO IMAGE URLs, HANDLE BOTH CASES -----
     var before1 = 'src="/';
     var before2 = 'src="/sites/default/files/';
     var after1 = 'src="http://woodylewis.com/';
     var after2 = 'src="http://woodylewis.com/sites/default/files/';
     var result1 = payload.split(before1).join(after1);
     var result2 = result1.split(before2).join(after2);
-
     return result2;
   }
 
-  var handlePostSuccess = function(data, status) {
-    // PREPEND REMOTE DOMAIN TO IMAGE LINKS
-    $scope.currentPost = addRemoteDomain(data); 
-    var postState = 'post';
-    $state.go(postState);
-  };
-
-  fetchBlogService.fetchBlog()
-          .success(handleSuccess);  
-
   $scope.showCurrentPost= function(nid) {
-    $scope.currentPost = fetchBlogService.fetchBlogPost(nid)
-    .success(handlePostSuccess);
+    fetchBlogService.fetchBlogPost(nid)
+    .then(function(data) {
+      $scope.currentPost = addRemoteDomain(data); 
+      var postState = 'post';
+      $state.go(postState);
+    }), function(error){
+        console.log('get posts error', error);
+    };
   };
-});
+}]);

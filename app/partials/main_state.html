@@ -1,7 +1,7 @@
 <div class="wls-copy">
-    This app creates a Service Controller that makes a RESTful call to
-    <a href="http://woodylewis.com" target="_blank">my blog</a>, running on a Drupal CMS, and retrieves a JSON payload of all published posts. 
-    <p><br>The controller stores the payload in its scope, making it available to a child controller attached to the view for specific post. The blog domain is prepended to URLs for all images hosted on that domain. Some special characters have not been decoded, and older articles have different styles.    
+    This app uses a controller and service to make RESTful calls to
+    <a href="http://woodylewis.com" target="_blank">my blog</a> (running on a remote Drupal CMS), and retrieves either a list of all published posts or a post from that list. Angular promises are used to handle return values, and strict contextual escaping is used on individual post content. 
+    <p><br>The parent controller stores the list in its scope, and a child controller processes the specific post. The blog domain is prepended to URLs for all images hosted on that domain. Some older articles have different styles.    
     <p><a href="https://github.com/woodylewis/wls-fetch-blog" target="_blank">GitHub Repo</a>
 </div>
 <div id="wls-button-panel">
