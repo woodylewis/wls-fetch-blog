@@ -38,6 +38,7 @@ angular.module('myApp', [
 //------  INJECT STRICT CONTEXTUAL ESCAPING INTO VIEW CONTROLLER -----
 .controller('PostCtrl', ['$scope', '$sce', '$anchorScroll', '$location', function($scope, $sce, $anchorScroll, $location) {
   $scope.markup = $sce.trustAsHtml($scope.$parent.currentPost);
+  //----- OLDER POSTS FURTHER DOWN THE LIST NEED TO BE SCROLLED TO THEIR TOP LINE
   $location.hash('top');
   $anchorScroll();
 }])
